@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+
+	Nonzero1.0 by nodethirtythree design
+	http://www.nodethirtythree.com
+	missing in a maze
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>
+			iBin0.1 {% block title %}{% endblock %}
+		</title>
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<link rel="stylesheet" type="text/css" title="Blue" href="{{ url_for('static', filename='style.css') }}" />
+		{% block javascript %}
+		{% endblock %}
+	</head>
+	<body>
+		<div id="header">
+			<div id="header_inner" class="fluid">
+				<div id="logo">
+					<h1>
+						<span><a href="/">ibin</a></span>0.1
+					</h1>
+				</div>
+				<div id="menu">
+					{% block menu %}
+					<ul>
+						<li>
+							<a href="{{ url_for('paste') }}" class="active">Paste</a>
+						</li>
+						<li>
+							<a href="{{ url_for('pastes', numentries=10) }}">List</a>
+						</li>
+					</ul>
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+		<div id="main">
+			<div id="main_inner" class="fluid">
+				<div id="primaryContent_columnless">
+					<div id="columnA_columnless">
+						{% block content %}
+						{% endblock %}
+					</div>
+				</div><br class="clear" />
+			</div>
+		</div>
+		<div id="footer">
+			Copyright &copy; 2012 Emil Erlandsson&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{url_for('rssfeeds')}}">RSS</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{url_for('tricks')}}">Tricks</a>
+		</div>
+	</body>
+</html>

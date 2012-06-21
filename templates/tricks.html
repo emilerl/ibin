@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}Tricks{% endblock %}
+{% block content %}
+                                        <h3>
+                                                ibin tricks
+                                        </h3>
+                                        <h4>Script for command line uploads</h4>
+                                        <pre>
+#!/bin/bash
+URL="{{ request.url|replace("/tricks","") }}";E=`curl -s -F "file=@$1" --form-string "noredirect=true" $URL`; echo $URL$E
+                                        </pre>
+                                        <h4>Bookmarklet</h4>
+                                        <p>Bookmarklet for posting URL to iBin. Drag this link '<a href="javascript:location.href='{{ request.url|replace("/tricks","") }}/?uploadurl='+encodeURIComponent(location.href)">Upload to iBin</a>' to your bookmarks bar.</p>
+                                        <pre>
+javascript:location.href='{{ request.url|replace("/tricks","") }}/?uploadurl='+encodeURIComponent(location.href)
+                                        </pre>
+
+{% endblock %}

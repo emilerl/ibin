@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}List of pastes{% endblock %}
+{% block menu %}
+					<ul>
+						<li>
+							<a href="{{ url_for('paste') }}" class="active">Paste</a>
+						</li>
+						<li>
+							<a href="{{ url_for('pastes', numentries=10) }}">List</a>
+						</li>
+					</ul>
+{% endblock %}
+{% block content %}
+					<h3>
+						Last {{ entries|length() }} pastes
+					</h3>
+					<ul>
+					{% for entry in entries %}
+						<li class="{{ loop.cycle('odd', 'even') }}">[<a href="{{ url_for('remove_file', filename=entry.filename) }}">D</a>]&nbsp;&nbsp;{{ entry.ts }}&nbsp;&nbsp;<a href="{{ url_for('uploaded_file', filename=entry.filename) }}">{{ entry.name }}</a></li>
+					{% endfor %}	
+					</ul>
+{% endblock %}

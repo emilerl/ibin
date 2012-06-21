@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+
+<channel>
+<title>iBin latest 10 pasts</title>
+<description>User pasted links</description>
+<link>{{ request.url|replace("/feed","") }}</link>
+
+{% for entry in entries %}
+<item>
+<title>{{ entry.name }}</title>
+<link>{{ request.url|replace("/feed","") + url_for('uploaded_file', filename=entry.filename) }}</link>
+<guid isPermaLink="false">{{ entry.uuid }}</guid>
+<pubDate>{{ entry.ts }}</pubDate>
+</item>
+{% endfor %}
+
+</channel>
+</rss>
+

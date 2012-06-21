@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block javascript %}
+<script>
+function is_valid_url(url)
+{
+	return url.match(/^(ht|f)tps?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/);
+}
+
+function validateForm()
+{
+	var x=document.forms["urlform"]["uploadurl"].value;
+	if (!is_valid_url(x))
+	{
+		alert("You must supply a valid url!");
+		return false;
+	}
+}
+
+function validateFileUpload()
+{
+	var x=document.forms["fileform"]["file"].value;
+	if (x==null || x=="")
+	{
+		alert("You must supply a file!");
+		return false;
+	}
+}
+</script>
+{% endblock %}
+{% block menu %}
+					<ul>
+						<li>
+							<a href="{{ url_for('paste') }}" class="active">Paste</a>
+						</li>
+						<li>
+							<a href="{{ url_for('pastes', numentries=10) }}">List</a>
+						</li>
+					</ul>
+{% endblock %}
+{% block content %}
+						<h3>
+							Paste something
+						</h3>
+						<h4>
+						    Upload a file
+						<h4>
+						<form action="" method="post" enctype="multipart/form-data" name="fileform" onsubmit="return validateFileUpload()">
+						<table>
+						    <tr>
+						        <td><strong>From File</strong></td>
+						        <td><input type="file" name="file" /></td>
+						    </tr>
+						     <tr>
+						        <td><strong>Don't redirect</strong></td>
+						        <td><input name="noredirect" type="checkbox" value="1" /></td>
+						    </tr>
+						    <tr>
+						        <td colspan="2"><input type="submit" value="Upload file" /></td>
+						    </tr>
+						</table>
+						</form>
+						
+						<br class="clear" />
+						<h4>
+						    Upload file from URL
+						<h4>
+						<form action="" method="post" name="urlform" onsubmit="return validateForm()" >
+						<table>
+						    <tr>
+						        <td><strong>From URL</strong></td>
+						        <td><input type="text" name="uploadurl" /></td>
+						    </tr>
+						     <tr>
+						        <td><strong>Don't redirect</strong></td>
+						        <td><input name="noredirect" type="checkbox" value="1" /></td>
+						    </tr>
+						    <tr>
+						        <td colspan="2"><input type="submit" value="Upload from URL" /></td>
+						    </tr>
+						</table>
+						</form><br class="clear" />
+{% endblock %}
